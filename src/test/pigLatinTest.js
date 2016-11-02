@@ -50,4 +50,9 @@ describe('PigLatin', function() {
     expect(PigLatin.piglatinize(source)).to.equal(latinized)
   });
 
+  it('Keep whitespace as is.', function() {
+    var source = 'stairway is  starway';
+    expect(PigLatin.piglatinize(source)).to.equal(source)
+  });
+
 });
