@@ -23,20 +23,22 @@ describe('PigLatin', function() {
     expect(PigLatin.piglatinize(source)).to.equal(latinized)
   });
 
-
+  //  c!an't -> cant -> antcay -> antcay -> antcay
   it('Punctuation must remain in the same relative place from the end of the word', function() {
-    var source = "can't"
-      , latinized = 'antca’y';
+    var source = "c!an't"
+      , latinized = "ant!ca'y";
     expect(PigLatin.piglatinize(source)).to.equal(latinized)
+  });
 
-    source = "end."
-    latinized = "endway."
+  it('Punctuation must remain in the same relative place from the end of the word 2', function() {
+    var source = "end."
+      , latinized = "endway."
     expect(PigLatin.piglatinize(source)).to.equal(latinized)
   });
 
   it('Hyphens are treated as two words', function() {
     var source = 'this-thing'
-      , latinized = 'histay-hinstay';
+      , latinized = 'histay-hingtay';
     expect(PigLatin.piglatinize(source)).to.equal(latinized)
   });
 
@@ -44,14 +46,22 @@ describe('PigLatin', function() {
     var source = 'Beach'
       , latinized = 'Eachbay';
     expect(PigLatin.piglatinize(source)).to.equal(latinized)
+  });
 
-    source = "McCloud"
-    latinized = "CcLoudmay"
+  it('Capitalization must remain in the same place. 2', function() {
+    var source = "McCloud"
+      , latinized = "CcLoudmay"
+    expect(PigLatin.piglatinize(source)).to.equal(latinized)
+  });
+
+  it('Capitalization must remain in the same place. 3', function() {
+    var source = "McCloudBeach"
+      , latinized = "CcLoudbEachmay"
     expect(PigLatin.piglatinize(source)).to.equal(latinized)
   });
 
   it('Keep whitespace as is.', function() {
-    var source = 'stairway is  starway';
+    var source = 'stairway way  starway';
     expect(PigLatin.piglatinize(source)).to.equal(source)
   });
 

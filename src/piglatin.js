@@ -1,3 +1,4 @@
+'use strict'
 // PigLatin
 // ========
 //
@@ -25,10 +26,30 @@ module.exports = (function(){
 
   // vowels
   var vowels = 'aeiouAEIOU';
-  // if (vowels.indexOf(letter.toLowerCase()) !== 1) {}
 
   // consonants
-   var consonants = ' bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ';
+  var consonants = ' bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ';
+
+  // regexes  for matching upperCase chars and Punctuation
+  var upperCaseRe = /[A-Z]/g
+    , punctuationRe = /['’!.]/g
+
+
+  // creates list of matching indexes for given regex
+  function regexIndexes(regex, token) {
+    var indexes = []
+      , match
+      , tokenLength = token.length
+
+    while( (match = regex.exec(token)) != null ){
+      indexes.push({
+        obj: match[0],
+        index: match.index,
+        lastIndex: tokenLength - match.index -1
+      })
+    }
+    return indexes
+  }
 
   // just stub implementation for now
   function piglatinize(text) {
@@ -36,6 +57,56 @@ module.exports = (function(){
 
     // process each tokens
     var latinized = tokens.map(function(token){
+
+      // further split byt hyphenation
+      var subTokens = token.split('-')
+
+      subTokens = subTokens.map(function(token){
+        // take punctuation map and remove punctuation
+        var punctuationIdx = regexIndexes(punctuationRe, token)
+        token = token.replace(punctuationRe, '')
+
+        // take Capitalization map and alowercase all
+        var upperCaseIdx = regexIndexes(upperCaseRe, token)
+        token = token.toLowerCase()
+
+        // length|ending 'way'|consonant|vowel test
+        if (token.length > 1) {
+          var result = token
+            , firstChar = token.charAt(0)
+          if ((token.length == 1) || (token.length >= 3 && token.slice(-3) === "way"))  {
+            result = token // noop
+          } else if (vowels.indexOf(firstChar) !== -1) {
+            // we have vowel
+            result = token + "way"
+          } else if (consonants.indexOf(firstChar !== -1)) {
+            result = token.slice(1)+firstChar+"ay"
+          }
+          token = result
+        }
+
+        // apply Capitalization map back to result
+        upperCaseIdx.forEach(function(match){
+          token = token.slice(0, match.index)
+                  + token.charAt(match.index).toUpperCase()
+                  + token.slice(match.index+1)
+        });
+
+        // appply punctuation map back to result
+        punctuationIdx.reverse()
+        punctuationIdx.forEach(function(match){
+          token = token.slice(0, token.length - match.lastIndex)
+                  + match.obj
+                  + token.slice(token.length - match.lastIndex)
+        });
+
+        return token
+
+      });
+
+      // join based on hyphenation
+      token = subTokens.join('-');
+
       return token
     })
 
