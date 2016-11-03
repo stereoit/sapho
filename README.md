@@ -3,27 +3,29 @@ Piglatinaze This!Piglatinaze This!
 
 Simple translator form adults to child's speak.
 
-It has thos rules:
+Rules
+-----
 
 Words that start with a consonant have their first letter moved to the end of the word and the letters “ay” added to the end.
- - Hello becomes Ellohay
+ - *Hello* becomes *Ellohay*
 
 Words that start with a vowel have the letters “way” added to the end.
- - apple becomes appleway
+ - _apple_ becomes _appleway_
 
 Words that end in “way” are not modified.
- - stairway stays as stairway
+ - _stairway_ stays as _stairway_
 
 Punctuation must remain in the same relative place from the end of the word.
- - can’t becomes antca’y
- - end. becomes endway.
+ - _can’t_ becomes _antca’y_
+ - _end._ becomes _endway_.
 
 Hyphens are treated as two words
- - this-thing becomes histay-hinstay
+ - _this-thing_ becomes _histay-hinstay_
 
 Capitalization must remain in the same place.
- - Beach becomes Eachbay
- - McCloud becomes CcLoudmay
+ - _Beach_ becomes _Eachbay_
+ - _McCloud_ becomes _CcLoudmay_
+
 
  Installation and running
  ------------------------

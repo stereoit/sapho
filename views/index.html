@@ -12,12 +12,29 @@
 </head>
 
 <body>
+  <nav>
+    <div class="nav-wrapper container">
+      <a href="#" class="brand-logo">IglAtinizepay histay!</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="https://github.com/stereoit/sapho">GitHub</a></li>
+      </ul>
+    </div>
+  </nav>
+  <br />
   <div class="container">
-    <h1>IglAtinizepay histay!</h1>
 
-    <input id="plInput" placeholder="Type your text here..." type="text"  value="" required>
+    <div class="row">
+        <div class="col">
+          <div class="card large darken-1">
+            <div class="card-content">
+              <span class="card-title"> PigLatinize translator</span>
+              <textarea id="plInput" placeholder="Type your text here..." class="materialize-textarea" required></textarea>
+              <div id="translatedText"></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <div id="translatedText"></div>
   </div>
 
   <!--  Scripts-->
