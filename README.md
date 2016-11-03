@@ -1,5 +1,5 @@
-Piglatinaze This!Piglatinaze This!
-==================================
+Piglatinaze This!
+=================
 
 Simple translator form adults to child's speak.
 
@@ -27,8 +27,8 @@ Capitalization must remain in the same place.
  - _McCloud_ becomes _CcLoudmay_
 
 
- Installation and running
- ------------------------
+Installation and running
+------------------------
 
      $ git clone git@github.com:stereoit/sapho.git
      $ cd spaho
