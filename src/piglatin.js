@@ -22,7 +22,7 @@
 //  - Beach becomes Eachbay
 //  - McCloud becomes CcLoudmay
 
-module.exports = (function(){
+module.exports = (function() {
 
   // vowels
   var vowels = 'aeiouAEIOU';
@@ -31,24 +31,40 @@ module.exports = (function(){
   var consonants = ' bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ';
 
   // regexes  for matching upperCase chars and Punctuation
-  var upperCaseRe = /[A-Z]/g
-    , punctuationRe = /['’!.]/g
-
+  var upperCaseRe = /[A-Z]/g,
+    punctuationRe = /['’!.]/g
 
   // creates list of matching indexes for given regex
   function regexIndexes(regex, token) {
-    var indexes = []
-      , match
-      , tokenLength = token.length
+    var indexes = [],
+      match, tokenLength = token.length
 
-    while( (match = regex.exec(token)) != null ){
+    while ((match = regex.exec(token)) != null) {
       indexes.push({
         obj: match[0],
         index: match.index,
-        lastIndex: tokenLength - match.index -1
+        lastIndex: tokenLength - match.index - 1
       })
     }
     return indexes
+  }
+
+  // length|ending 'way'|consonant|vowel test
+  function latinize(token) {
+    if (token.length > 1) {
+      var result = token,
+        firstChar = token.charAt(0)
+      if ((token.length == 1) || (token.length >= 3 && token.slice(-3) === "way")) {
+        result = token // noop
+      } else if (vowels.indexOf(firstChar) !== -1) {
+        // we have vowel
+        result = token + "way"
+      } else if (consonants.indexOf(firstChar !== -1)) {
+        result = token.slice(1) + firstChar + "ay"
+      }
+      token = result
+    }
+    return token
   }
 
   // just stub implementation for now
@@ -56,12 +72,12 @@ module.exports = (function(){
     var tokens = text.split(' ')
 
     // process each tokens
-    var latinized = tokens.map(function(token){
+    var latinized = tokens.map(function(token) {
 
-      // further split byt hyphenation
+      // further split by hyphenation
       var subTokens = token.split('-')
 
-      subTokens = subTokens.map(function(token){
+      subTokens = subTokens.map(function(token) {
         // take punctuation map and remove punctuation
         var punctuationIdx = regexIndexes(punctuationRe, token)
         token = token.replace(punctuationRe, '')
@@ -71,33 +87,21 @@ module.exports = (function(){
         token = token.toLowerCase()
 
         // length|ending 'way'|consonant|vowel test
-        if (token.length > 1) {
-          var result = token
-            , firstChar = token.charAt(0)
-          if ((token.length == 1) || (token.length >= 3 && token.slice(-3) === "way"))  {
-            result = token // noop
-          } else if (vowels.indexOf(firstChar) !== -1) {
-            // we have vowel
-            result = token + "way"
-          } else if (consonants.indexOf(firstChar !== -1)) {
-            result = token.slice(1)+firstChar+"ay"
-          }
-          token = result
-        }
+        token = latinize(token)
 
         // apply Capitalization map back to result
-        upperCaseIdx.forEach(function(match){
-          token = token.slice(0, match.index)
-                  + token.charAt(match.index).toUpperCase()
-                  + token.slice(match.index+1)
+        upperCaseIdx.forEach(function(match) {
+          token = token.slice(0, match.index) +
+            token.charAt(match.index).toUpperCase() +
+            token.slice(match.index + 1)
         });
 
         // appply punctuation map back to result
-        punctuationIdx.reverse()
-        punctuationIdx.forEach(function(match){
-          token = token.slice(0, token.length - match.lastIndex)
-                  + match.obj
-                  + token.slice(token.length - match.lastIndex)
+        punctuationIdx.reverse() // to keep the relative positions
+        punctuationIdx.forEach(function(match) {
+          token = token.slice(0, token.length - match.lastIndex) +
+            match.obj +
+            token.slice(token.length - match.lastIndex)
         });
 
         return token
@@ -116,7 +120,7 @@ module.exports = (function(){
 
 
   return {
-      piglatinize: piglatinize
+    piglatinize: piglatinize
   }
 
 })();
