@@ -31,4 +31,5 @@ Capitalization must remain in the same place.
      $ git clone git@github.com:stereoit/sapho.git
      $ cd spaho
      $ yarn install
+     $ rollup -c
      $ node server.js
