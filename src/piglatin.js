@@ -119,6 +119,7 @@ module.exports = (function() {
 
 
 
+  // revealing module to express what is returned
   return {
     piglatinize: piglatinize
   }
