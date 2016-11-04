@@ -24,16 +24,40 @@
   <div class="container">
 
     <div class="row">
-        <div class="col">
-          <div class="card large darken-1">
-            <div class="card-content">
-              <span class="card-title"> PigLatinize translator</span>
-              <textarea id="plInput" placeholder="Type your text here..." class="materialize-textarea" required></textarea>
-              <div id="translatedText"></div>
-            </div>
+      <div class="col">
+        <div class="card small darken-1">
+          <div class="card-content">
+            <span class="card-title"> PigLatinize translator</span>
+            <textarea id="plInput" placeholder="Type your text here..." class="materialize-textarea" required></textarea>
+            <div id="translatedText"></div>
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="card-panel large">
+          <h4>How it works</h4>
+          <dl>
+            <dt>Words that start with a consonant have their first letter moved to the end of the word and the letters “ay” added to the end.<br/></dt>
+            <dd>- <strong>Hello</strong> becomes <strong>Ellohay</strong></dd>
+            <dt>Words that start with a vowel have the letters “way” added to the end.</dt>
+            <dd>- <strong>apple</strong> becomes <strong>appleway</strong></dd>
+            <dt>Words that end in “way” are not modified.</dt>
+            <dd>- <strong>stairway</strong> stays as <strong>stairway</strong></dd>
+            <dt>Punctuation must remain in the same relative place from the end of the word.</dt>
+            <dd>- <strong>can’t</strong> becomes <strong>antca’y</strong></dd>
+            <dd>- <strong>end.</strong> becomes <strong>endway</strong>.</dd>
+            <dt>Hyphens are treated as two words</dt>
+            <dd>- <strong>this-thing</strong> becomes <strong>histay-hinstay</strong></dd>
+            <dt>Capitalization must remain in the same place.</dt>
+            <dd>- <strong>Beach</strong> becomes <strong>Eachbay</strong></dd>
+            <dd>- <strong>McCloud</strong> becomes <strong>CcLoudmay</strong></dd>
+          </dl>
+        </div>
+      </div>
+    </div>
 
   </div>
 
